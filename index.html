@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. [Your Name] — Academic Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────
+       DESIGN SYSTEM — COOL BLUE / TEAL PALETTE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --deep:      #0b1e2d;
+      --dark:      #0f2740;
+      --mid:       #1a3a56;
+      --teal:      #0d9488;
+      --teal-l:    #14b8a6;
+      --teal-glow: rgba(13,148,136,0.18);
+      --sky:       #38bdf8;
+      --ice:       #e0f2fe;
+      --surface:   #f0f7fb;
+      --surface2:  #e4f0f7;
+      --white:     #ffffff;
+      --pub-green: #0f766e;
+      --pub-blue:  #0369a1;
+      --pub-purp:  #7c3aed;
+      --text:      #0f2336;
+      --muted:     #4b6a80;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+      --radius:    6px;
+      --radius-lg: 12px;
+      --shadow:    0 4px 24px rgba(11,30,45,0.08);
+      --shadow-lg: 0 12px 48px rgba(11,30,45,0.15);
+      --nav-h:     68px;
+    }
+
+    body { font-family: var(--sans); background: var(--surface); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--surface2); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+    .skip-link { position: absolute; top: -40px; left: 1rem; background: var(--teal); color: white; padding: .5rem 1rem; border-radius: 0 0 var(--radius) var(--radius); font-size: .85rem; font-weight: 500; z-index: 10000; transition: top .2s; }
+    .skip-link:focus { top: 0; }
+
+    h1,h2,h3,h4 { font-family: var(--serif); line-height: 1.15; font-weight: 600; }
+    h1 { font-size: clamp(2.6rem, 5.5vw, 4.6rem); }
+    h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); }
+    h3 { font-size: clamp(1.05rem, 2vw, 1.35rem); }
+    h4 { font-size: 1.05rem; }
+    p  { color: var(--muted); }
+    a  { color: var(--teal); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--teal-l); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      z-index: 1000; background: rgba(11,30,45,0.96);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(13,148,136,0.18); transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.35); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--ice); font-style: italic; }
+    .nav-logo span { color: var(--teal-l); font-style: normal; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: rgba(224,242,254,0.6); font-size: .75rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal-l); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ice); transition: all .3s; }
+
+    @media (max-width: 800px) {
+      .nav-toggle { display: flex; }
+      .nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; background: rgba(11,30,45,0.98); padding: 1.5rem 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(13,148,136,0.2); }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: .9rem; }
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+    section { padding: 7rem 0; position: relative; }
+    section:nth-child(even) { background: var(--surface2); }
+    .section-eyebrow { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: .75rem; display: flex; align-items: center; gap: .75rem; }
+    .section-eyebrow::after { content: ''; display: block; width: 36px; height: 1.5px; background: var(--teal); }
+    .section-title { color: var(--text); margin-bottom: 3.5rem; }
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.8rem; border-radius: var(--radius); font-family: var(--sans); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: all .25s; cursor: pointer; border: none; }
+    .btn-teal { background: var(--teal); color: white; border: 1.5px solid var(--teal); }
+    .btn-teal:hover { background: var(--teal-l); color: white; border-color: var(--teal-l); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(13,148,136,.3); }
+    .btn-outline { background: transparent; color: var(--ice); border: 1.5px solid rgba(224,242,254,.3); }
+    .btn-outline:hover { border-color: var(--teal-l); color: var(--teal-l); transform: translateY(-2px); }
+
+    /* ── HERO ── */
+    #hero { min-height: 100vh; background: var(--deep); display: flex; align-items: center; padding: calc(var(--nav-h) + 4rem) 0 6rem; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; top: -20%; right: -8%; width: 65vw; height: 65vw; max-width: 860px; border-radius: 50%; background: radial-gradient(circle, rgba(13,148,136,.13) 0%, rgba(56,189,248,.05) 50%, transparent 70%); pointer-events: none; animation: orb1 12s ease-in-out infinite alternate; }
+    #hero::after  { content: ''; position: absolute; bottom: -10%; left: -10%; width: 50vw; height: 50vw; max-width: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.07) 0%, transparent 65%); pointer-events: none; animation: orb2 15s ease-in-out infinite alternate; }
+    @keyframes orb1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-30px,20px) scale(1.08); } }
+    @keyframes orb2 { from { transform: translate(0,0) scale(1); } to { transform: translate(20px,-15px) scale(1.06); } }
+    .hero-grid-bg { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(13,148,136,.04) 1px,transparent 1px), linear-gradient(90deg,rgba(13,148,136,.04) 1px,transparent 1px); background-size: 60px 60px; }
+
+    .hero-inner { display: grid; grid-template-columns: 1fr 320px; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: .6rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal-l); border: 1px solid rgba(20,184,166,.35); padding: .35rem 1rem; border-radius: 20px; margin-bottom: 2rem; background: rgba(13,148,136,.08); }
+    .hero-tag::before { content: '●'; font-size: .5rem; color: var(--teal); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+    .hero-name { color: var(--ice); margin-bottom: 1.25rem; font-weight: 700; }
+    .hero-name .accent { color: var(--teal-l); }
+    .hero-subtitle { font-size: clamp(.9rem,1.4vw,1rem); color: rgba(224,242,254,.55); font-weight: 300; letter-spacing: .03em; margin-bottom: .35rem; }
+    .hero-divider { width: 50px; height: 2px; margin: 2rem 0; background: linear-gradient(90deg, var(--teal), rgba(56,189,248,.3), transparent); }
+    .hero-bio { font-size: 1.05rem; color: rgba(224,242,254,.65); max-width: 540px; line-height: 1.85; font-weight: 300; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+
+    /* ── HEADSHOT CARD ── */
+    .headshot-card { position: relative; flex-shrink: 0; }
+    .headshot-card::before { content: ''; position: absolute; inset: -10px; border: 1px solid rgba(13,148,136,.25); border-radius: var(--radius-lg); pointer-events: none; }
+    .headshot-card::after  { content: ''; position: absolute; bottom: -18px; right: -18px; width: 55%; height: 55%; background: rgba(13,148,136,.1); border-radius: var(--radius-lg); z-index: -1; }
+    .headshot-img-wrap { width: 100%; aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; background: var(--mid); position: relative; }
+    .headshot-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .headshot-placeholder { width: 100%; height: 100%; min-height: 360px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; background: linear-gradient(160deg, var(--mid) 0%, var(--dark) 100%); color: rgba(224,242,254,.3); }
+    .headshot-placeholder p { color: rgba(224,242,254,.3); font-size: .78rem; font-style: italic; text-align: center; }
+    .headshot-hint { position: absolute; bottom: 0; left: 0; right: 0; padding: .75rem 1rem; background: linear-gradient(to top, rgba(11,30,45,.88) 0%, transparent 100%); font-size: .65rem; color: rgba(224,242,254,.4); text-align: center; font-style: italic; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+
+    .linkedin-badge { position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: .5rem; background: #0a66c2; color: white; padding: .55rem 1.25rem; border-radius: 30px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; box-shadow: 0 4px 20px rgba(10,102,194,.4); text-decoration: none; transition: all .25s; white-space: nowrap; z-index: 10; }
+    .linkedin-badge:hover { background: #0e76cc; transform: translateX(-50%) translateY(-2px); box-shadow: 0 6px 28px rgba(10,102,194,.5); color: white; }
+
+    @media (max-width: 920px) { .hero-inner { grid-template-columns: 1fr; gap: 3rem; } .headshot-card { width: 200px; margin: 0 auto; } }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
+    .about-lead { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--text); line-height: 1.65; margin-bottom: 1.5rem; }
+    .about-body p { font-size: 1rem; line-height: 1.85; margin-bottom: 1.1rem; }
+    .sidebar-card { border-left: 2.5px solid var(--teal); padding: 1.25rem 1.5rem; background: var(--white); box-shadow: var(--shadow); margin-bottom: 1.5rem; border-radius: 0 var(--radius) var(--radius) 0; }
+    .sidebar-card:last-child { margin-bottom: 0; }
+    .sidebar-card h4 { font-family: var(--sans); font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; font-weight: 600; }
+    .interest-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .interest-list li { font-size: .88rem; color: var(--muted); display: flex; align-items: flex-start; gap: .5rem; }
+    .interest-list li::before { content: '›'; color: var(--teal); font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+    .affil-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .affil-list li { font-size: .88rem; color: var(--muted); line-height: 1.45; }
+    .affil-list li strong { display: block; color: var(--text); font-size: .82rem; font-weight: 600; margin-bottom: .1rem; }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    /* ── RESEARCH ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.75rem; }
+    .project-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); transition: transform .3s,box-shadow .3s; display: flex; flex-direction: column; border: 1px solid rgba(13,148,136,.08); }
+    .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .project-thumb { height: 155px; position: relative; display: flex; align-items: flex-end; padding: 1.25rem; overflow: hidden; }
+    .project-card:nth-child(1) .project-thumb { background: linear-gradient(135deg,#0f2740 0%,#0d9488 100%); }
+    .project-card:nth-child(2) .project-thumb { background: linear-gradient(135deg,#0c2d4a 0%,#0369a1 100%); }
+    .project-card:nth-child(3) .project-thumb { background: linear-gradient(135deg,#0a1e36 0%,#0891b2 100%); }
+    .project-card:nth-child(4) .project-thumb { background: linear-gradient(135deg,#0d2437 0%,#14b8a6 100%); }
+    .project-thumb::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%,rgba(56,189,248,.15) 0%,transparent 65%); }
+    .project-status { font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--teal-l); background: rgba(13,148,136,.15); border: 1px solid rgba(20,184,166,.3); padding: .25rem .65rem; border-radius: 20px; position: relative; z-index: 1; }
+    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-body h3 { font-size: 1.05rem; color: var(--text); margin-bottom: .65rem; line-height: 1.35; }
+    .project-body p { font-size: .875rem; line-height: 1.7; flex: 1; margin-bottom: 1.1rem; }
+    .project-collab { font-size: .75rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; padding-top: .75rem; border-top: 1px solid rgba(13,148,136,.1); }
+    .project-collab::before { content: '⊕'; color: var(--teal); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-tabs { display: flex; margin-bottom: 3rem; border-bottom: 1.5px solid rgba(13,148,136,.15); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .pub-tab { padding: .75rem 1.5rem; font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1.5px; transition: all .2s; background: none; border-top: none; border-left: none; border-right: none; font-family: var(--sans); white-space: nowrap; }
+    .pub-tab:hover { color: var(--text); }
+    .pub-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+    .pub-group { display: none; }
+    .pub-group.active { display: block; }
+    .pub-group-title { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; margin-top: 2.25rem; font-weight: 600; }
+    .pub-group-title:first-child { margin-top: 0; }
+    .pub-list { display: flex; flex-direction: column; gap: .9rem; }
+    .pub-item { background: var(--white); border-radius: var(--radius); padding: 1.4rem 1.75rem; display: grid; grid-template-columns: 64px 1fr; gap: 1.25rem; align-items: start; box-shadow: var(--shadow); border-left: 3px solid transparent; transition: transform .25s, box-shadow .25s; }
+    .pub-item:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
+    .pub-item.published    { border-left-color: var(--pub-green); }
+    .pub-item.under-review { border-left-color: var(--pub-blue); }
+    .pub-item.draft        { border-left-color: var(--pub-purp); }
+    .pub-year { font-family: var(--serif); font-size: 1.35rem; font-weight: 300; color: var(--muted); line-height: 1; padding-top: 3px; }
+    .pub-content { display: flex; flex-direction: column; gap: .45rem; }
+    .pub-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.35; }
+    .pub-authors { font-size: .82rem; color: var(--muted); }
+    .pub-authors strong { color: var(--text); font-weight: 600; }
+    .pub-meta { font-size: .82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+    .pub-meta em { font-style: italic; }
+    .pub-meta .sep { color: rgba(75,106,128,.4); }
+    .pub-actions { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-top: .4rem; }
+    .badge { display: inline-flex; align-items: center; gap: .3rem; font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .22rem .65rem; border-radius: 20px; border: 1px solid; }
+    .badge-published  { color: var(--pub-green); border-color: var(--pub-green); background: rgba(15,118,110,.07); }
+    .badge-review     { color: var(--pub-blue);  border-color: var(--pub-blue);  background: rgba(3,105,161,.07); }
+    .badge-draft      { color: var(--pub-purp);  border-color: var(--pub-purp);  background: rgba(124,58,237,.07); }
+    .pub-link { font-size: .75rem; font-weight: 600; color: var(--teal); letter-spacing: .04em; display: inline-flex; align-items: center; gap: .25rem; transition: gap .2s; }
+    .pub-link:hover { gap: .45rem; }
+    .abstract-toggle { font-size: .72rem; color: var(--muted); cursor: pointer; background: none; border: none; font-family: var(--sans); padding: 0; transition: color .2s; }
+    .abstract-toggle:hover { color: var(--teal); }
+    .abstract-body { display: none; font-size: .85rem; color: var(--muted); line-height: 1.75; border-top: 1px solid rgba(13,148,136,.12); margin-top: .75rem; padding-top: .75rem; font-style: italic; }
+    .abstract-body.open { display: block; }
+    @media (max-width: 560px) { .pub-item { grid-template-columns: 1fr; } .pub-year { font-size: 1rem; } }
+
+    /* ── GALLERY ── */
+    .gallery-stats { display: flex; gap: 2.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .gallery-stat .num { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; color: var(--teal); line-height: 1; }
+    .gallery-stat .lbl { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: .2rem; }
+
+    .gallery-filters { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .gf-btn { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .45rem 1.1rem; border-radius: 20px; border: 1.5px solid rgba(13,148,136,.25); color: var(--muted); background: var(--white); cursor: pointer; transition: all .2s; font-family: var(--sans); }
+    .gf-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .gf-btn.active { background: var(--teal); border-color: var(--teal); color: white; }
+
+    /* Masonry gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; grid-auto-rows: 220px; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: transform .35s ease, box-shadow .35s ease; }
+    .gallery-item:hover { transform: scale(1.025); box-shadow: var(--shadow-lg); z-index: 2; }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .gallery-item:hover .gallery-img { transform: scale(1.06); }
+    .gallery-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; transition: transform .5s ease; }
+    .gallery-item:hover .gallery-bg { transform: scale(1.06); }
+    .gallery-bg-1 { background: linear-gradient(145deg,#0f2740 0%,#0d9488 100%); }
+    .gallery-bg-2 { background: linear-gradient(145deg,#0c2d4a 0%,#0369a1 100%); }
+    .gallery-bg-3 { background: linear-gradient(145deg,#0a1e36 0%,#0891b2 100%); }
+    .gallery-bg-4 { background: linear-gradient(145deg,#0d2437 0%,#14b8a6 100%); }
+    .gallery-bg-5 { background: linear-gradient(145deg,#0b1e35 0%,#0284c7 100%); }
+    .gallery-bg-6 { background: linear-gradient(145deg,#0e2a40 0%,#0d9488 80%,#38bdf8 100%); }
+    .gallery-bg-7 { background: linear-gradient(145deg,#0c2038 0%,#075985 100%); }
+
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(11,30,45,.92) 0%,rgba(11,30,45,.2) 55%,transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem 1.4rem; transition: background .3s; }
+
+    .gallery-type { display: inline-flex; align-items: center; gap: .3rem; font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 12px; border: 1px solid; margin-bottom: .6rem; width: fit-content; }
+    .gtype-invited  { color: #5eead4; border-color: #5eead4; background: rgba(94,234,212,.1); }
+    .gtype-poster   { color: #7dd3fc; border-color: #7dd3fc; background: rgba(125,211,252,.1); }
+    .gtype-workshop { color: #a5f3fc; border-color: #a5f3fc; background: rgba(165,243,252,.1); }
+    .gtype-panel    { color: #bae6fd; border-color: #bae6fd; background: rgba(186,230,253,.1); }
+
+    .gallery-title { font-family: var(--serif); font-size: .95rem; font-weight: 600; color: white; line-height: 1.35; margin-bottom: .3rem; }
+    .gallery-meta  { font-size: .72rem; color: rgba(224,242,254,.6); display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
+    .gallery-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(224,242,254,.4); }
+    .gallery-detail { max-height: 0; overflow: hidden; transition: max-height .35s ease,opacity .35s ease; opacity: 0; font-size: .78rem; color: rgba(224,242,254,.7); line-height: 1.6; margin-top: .4rem; }
+    .gallery-item:hover .gallery-detail { max-height: 80px; opacity: 1; }
+
+    /* Add-photo hint overlay */
+    .gallery-add-hint { position: absolute; top: .75rem; right: .75rem; background: rgba(13,148,136,.25); border: 1px dashed rgba(20,184,166,.5); color: rgba(224,242,254,.6); font-size: .6rem; padding: .25rem .55rem; border-radius: var(--radius); pointer-events: none; }
+
+    /* Lightbox */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 5000; background: rgba(11,30,45,.95); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { background: var(--dark); border-radius: var(--radius-lg); max-width: 680px; width: 100%; padding: 2.5rem; position: relative; border: 1px solid rgba(13,148,136,.2); box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+    .lightbox-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: rgba(224,242,254,.5); font-size: 1.4rem; cursor: pointer; transition: color .2s; font-family: var(--sans); line-height: 1; }
+    .lightbox-close:hover { color: var(--ice); }
+    .lightbox-type  { margin-bottom: 1rem; }
+    .lightbox-title { font-family: var(--serif); font-size: 1.5rem; color: var(--ice); margin-bottom: .75rem; line-height: 1.3; }
+    .lightbox-event { font-size: .9rem; color: var(--teal-l); margin-bottom: 1rem; font-style: italic; }
+    .lightbox-desc  { font-size: .9rem; color: rgba(224,242,254,.6); line-height: 1.75; }
+    .lightbox-footer { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(13,148,136,.15); display: flex; gap: .5rem; flex-wrap: wrap; }
+
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } .gallery-item.wide { grid-column: span 2; } }
+    @media (max-width: 560px) { .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; } .gallery-item.wide,.gallery-item.tall { grid-column: span 1; grid-row: span 1; } }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--deep); }
+    #contact .section-eyebrow { color: var(--teal-l); }
+    #contact .section-eyebrow::after { background: var(--teal-l); }
+    #contact .section-title { color: var(--ice); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-intro { font-family: var(--serif); font-size: 1.25rem; font-weight: 300; color: rgba(224,242,254,.8); line-height: 1.65; margin-bottom: 2.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; }
+    .contact-item label { display: block; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-l); font-weight: 600; margin-bottom: .25rem; }
+    .contact-item a, .contact-item span { font-size: .95rem; color: rgba(224,242,254,.65); }
+    .contact-item a:hover { color: var(--teal-l); }
+    .social-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .social-btn { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(224,242,254,.5); border: 1px solid rgba(224,242,254,.12); padding: .5rem 1rem; border-radius: var(--radius); transition: all .25s; }
+    .social-btn:hover { color: var(--teal-l); border-color: rgba(13,148,136,.4); }
+    .social-btn.linkedin { border-color: rgba(10,102,194,.35); }
+    .social-btn.linkedin:hover { color: #5bafe8; border-color: rgba(10,102,194,.6); background: rgba(10,102,194,.08); }
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .45rem; }
+    .form-group label { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(224,242,254,.45); font-weight: 600; }
+    .form-group input, .form-group textarea { background: rgba(224,242,254,.04); border: 1px solid rgba(224,242,254,.1); border-radius: var(--radius); padding: .75rem 1rem; font-size: .9rem; color: var(--ice); font-family: var(--sans); transition: border-color .2s; outline: none; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(224,242,254,.2); }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(13,148,136,.5); }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+    .form-note { font-size: .76rem; color: rgba(224,242,254,.3); }
+    @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    /* ── FOOTER ── */
+    footer { background: rgba(0,0,0,.25); border-top: 1px solid rgba(13,148,136,.1); padding: 2rem; text-align: center; }
+    footer p { font-size: .78rem; color: rgba(224,242,254,.25); }
+    footer span { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#about">Skip to content</a>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">Dr. <span>Your Name</span></div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#talks">Conferences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" aria-label="Introduction">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Text -->
+      <div class="hero-text">
+        <div class="hero-tag">Academic Portfolio</div>
+        <h1 class="hero-name">Your<br><span class="accent">Full Name</span></h1>
+        <p class="hero-subtitle">PhD Candidate · [Your Department]</p>
+        <p class="hero-subtitle">[Your University] · [City, Country]</p>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <p class="hero-bio">
+          Brief headline about your research focus. What are the big questions you tackle?
+          What impact do you aim to create? 2–3 compelling sentences capturing your academic identity.
+        </p>
+        <div class="hero-cta">
+          <a href="#publications" class="btn btn-teal">View Publications</a>
+          <a href="assets/cv.pdf" class="btn btn-outline" target="_blank" rel="noopener">Download CV ↗</a>
+        </div>
+      </div>
+
+      <!-- Headshot -->
+      <div class="headshot-card fade-up">
+        <div class="headshot-img-wrap">
+          <!--
+            ══ ADD YOUR HEADSHOT ══
+            Replace the <div class="headshot-placeholder"> block below with:
+            <img src="assets/headshot.jpg" alt="Photo of [Your Name]">
+
+            Recommended: 400×500 px, JPG/WebP, professional background.
+          -->
+          <div class="headshot-placeholder">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <p>Your headshot here</p>
+            <p>Replace with: &lt;img src="assets/headshot.jpg"&gt;</p>
+          </div>
+          <div class="headshot-hint">Professional headshot · 400×500 px recommended</div>
+        </div>
+        <!-- LinkedIn button — update href -->
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="linkedin-badge" aria-label="LinkedIn Profile">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="section-eyebrow">Introduction</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-body fade-up">
+        <p class="about-lead">I am a [doctoral/postdoctoral] researcher in [Field] at [University], working with [Advisor Name] at the [Lab / Research Group Name].</p>
+        <p>My research sits at the intersection of [Area A] and [Area B], with a focus on [specific problem or phenomenon]. I am particularly interested in how [theme] shapes [outcome], drawing on methods from [methodology/approach].</p>
+        <p>Prior to my doctoral studies, I completed a [Degree] in [Field] at [University] and held research positions at [Institution], where I contributed to projects on [topic]. My work has been supported by [funding bodies / fellowships / grants].</p>
+        <p>Outside research, I am committed to [teaching / mentorship / public engagement / open science]. I believe strongly in [value relevant to your field].</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sidebar-card fade-up">
+          <h4>Research Interests</h4>
+          <ul class="interest-list">
+            <li>Research Interest One</li>
+            <li>Research Interest Two</li>
+            <li>Research Interest Three</li>
+            <li>Research Interest Four</li>
+            <li>Research Interest Five</li>
+          </ul>
+        </div>
+        <div class="sidebar-card fade-up">
+          <h4>Education & Affiliations</h4>
+          <ul class="affil-list">
+            <li><strong>PhD Candidate, 20XX–Present</strong>[Department], [University]</li>
+            <li><strong>Research Associate, 20XX–20XX</strong>[Organization or Lab]</li>
+            <li><strong>MSc / MA, 20XX</strong>[University]</li>
+            <li><strong>BSc / BA, 20XX</strong>[University]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section id="research">
+  <div class="container">
+    <div class="section-eyebrow">My Work</div>
+    <h2 class="section-title">Research Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card fade-up">
+        <div class="project-thumb">
+          <!-- Replace with: <img src="assets/project1.jpg" class="gallery-img" alt=""> -->
+          <span class="project-status">● Ongoing · 20XX–Present</span>
+        </div>
+        <div class="project-body">
+          <h3>Project Title One: A Descriptive Subtitle</h3>
+          <p>A 2–3 sentence description: the problem addressed, methods used, and anticipated contributions or key findings.</p>
+          <div class="project-collab">In collaboration with [Partner Institution / Funder]</div>
+        </div>
+      </article>
+      <article class="project-card fade-up">
+        <div class="project-thumb">
+          <span class="project-status">✓ Completed · 20XX</span>
+        </div>
+        <div class="project-body">
+          <h3>Project Title Two: Another Descriptive Subtitle</h3>
+          <p>Description of the second project. Include key methods, datasets, or theoretical frameworks. Mention publications or outcomes.</p>
+          <div class="project-collab">Funded by [Grant Body / Fellowship Name]</div>
+        </div>
+      </article>
+      <article class="project-card fade-up">
+        <div class="project-thumb">
+          <span class="project-status">⊕ Collaborative · 20XX–Present</span>
+        </div>
+        <div class="project-body">
+          <h3>Project Title Three: A Third Research Initiative</h3>
+          <p>Description emphasising the interdisciplinary or international aspects and your specific role within the larger team.</p>
+          <div class="project-collab">With [Co-PI Name], [University / Organization]</div>
+        </div>
+      </article>
+      <article class="project-card fade-up">
+        <div class="project-thumb">
+          <span class="project-status">◌ Forthcoming · 20XX</span>
+        </div>
+        <div class="project-body">
+          <h3>Project Title Four: Upcoming Research Direction</h3>
+          <p>Brief description of a planned project. What questions will it address? What new methods or data sources will you employ?</p>
+          <div class="project-collab">Pending funding from [Agency]</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<section id="publications">
+  <div class="container">
+    <div class="section-eyebrow">Scholarship</div>
+    <h2 class="section-title">Publications</h2>
+    <div class="pub-tabs" role="tablist">
+      <button class="pub-tab active" role="tab" aria-selected="true"  onclick="switchTab('all',    this)">All Works</button>
+      <button class="pub-tab"        role="tab" aria-selected="false" onclick="switchTab('pub',    this)">Published</button>
+      <button class="pub-tab"        role="tab" aria-selected="false" onclick="switchTab('review', this)">Under Review</button>
+      <button class="pub-tab"        role="tab" aria-selected="false" onclick="switchTab('draft',  this)">Drafts</button>
+    </div>
+
+    <!-- ALL -->
+    <div class="pub-group active" id="tab-all">
+      <p class="pub-group-title">Peer-Reviewed Journal Articles</p>
+      <div class="pub-list">
+        <article class="pub-item published fade-up">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <div class="pub-title">Full Title of Your Published Journal Article: A Subtitle Here</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author A, Co-Author B</div>
+            <div class="pub-meta"><em>Journal of [Field Studies]</em><span class="sep"> · </span>Vol. 12, No. 3, pp. 45–67<span class="sep"> · </span>DOI: 10.XXXX/XXXXX</div>
+            <div class="pub-actions">
+              <span class="badge badge-published">● Published</span>
+              <a href="assets/papers/paper1.pdf" class="pub-link" target="_blank" rel="noopener">PDF ↗</a>
+              <button class="abstract-toggle" onclick="toggleAbstract(this)">+ Abstract</button>
+            </div>
+            <div class="abstract-body">Paste your abstract here. A concise summary of the research question, methods, key findings, and implications. Typically 150–250 words.</div>
+          </div>
+        </article>
+        <article class="pub-item published fade-up">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <div class="pub-title">Title of Another Published Article in a Peer-Reviewed Venue</div>
+            <div class="pub-authors">Co-Author A, <strong>Your Name</strong>, Co-Author C</div>
+            <div class="pub-meta"><em>Annual Review of [Your Field]</em><span class="sep"> · </span>Vol. 8, pp. 120–145<span class="sep"> · </span>DOI: 10.XXXX/XXXXX</div>
+            <div class="pub-actions">
+              <span class="badge badge-published">● Published</span>
+              <a href="#" class="pub-link">PDF ↗</a>
+              <button class="abstract-toggle" onclick="toggleAbstract(this)">+ Abstract</button>
+            </div>
+            <div class="abstract-body">Abstract placeholder for this article. Replace with your actual text.</div>
+          </div>
+        </article>
+      </div>
+
+      <p class="pub-group-title">Conference Proceedings</p>
+      <div class="pub-list">
+        <article class="pub-item published fade-up">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <div class="pub-title">Conference Paper Title: Presented at a Major International Conference</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author D</div>
+            <div class="pub-meta"><em>Proceedings of the International Conference on [Field]</em><span class="sep"> · </span>[City, Country]<span class="sep"> · </span>pp. 234–241</div>
+            <div class="pub-actions">
+              <span class="badge badge-published">● Published</span>
+              <a href="#" class="pub-link">PDF ↗</a>
+              <button class="abstract-toggle" onclick="toggleAbstract(this)">+ Abstract</button>
+            </div>
+            <div class="abstract-body">Abstract placeholder for this conference paper.</div>
+          </div>
+        </article>
+      </div>
+
+      <p class="pub-group-title">Magazine & Public Scholarship</p>
+      <div class="pub-list">
+        <article class="pub-item published fade-up">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <div class="pub-title">Title of a Public-Facing Piece or Magazine Article</div>
+            <div class="pub-authors"><strong>Your Name</strong></div>
+            <div class="pub-meta"><em>[Magazine / Publication Name]</em><span class="sep"> · </span>[Issue / Date]</div>
+            <div class="pub-actions">
+              <span class="badge badge-published">● Published</span>
+              <a href="#" class="pub-link">Read Online ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="pub-group-title">Under Review</p>
+      <div class="pub-list">
+        <article class="pub-item under-review fade-up">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <div class="pub-title">Title of Article Currently Under Review at a Journal</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author E</div>
+            <div class="pub-meta">Submitted to <em>[Target Journal Name]</em><span class="sep"> · </span>Under review since [Month Year]</div>
+            <div class="pub-actions">
+              <span class="badge badge-review">◐ Under Review</span>
+              <a href="#" class="pub-link">Preprint ↗</a>
+              <button class="abstract-toggle" onclick="toggleAbstract(this)">+ Abstract</button>
+            </div>
+            <div class="abstract-body">Abstract placeholder for this paper under review.</div>
+          </div>
+        </article>
+        <article class="pub-item under-review fade-up">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <div class="pub-title">Second Manuscript Currently in the Review Process</div>
+            <div class="pub-authors">Co-Author F, <strong>Your Name</strong>, Co-Author G</div>
+            <div class="pub-meta">In preparation for <em>[Target Journal]</em></div>
+            <div class="pub-actions"><span class="badge badge-review">◐ In Preparation</span></div>
+          </div>
+        </article>
+      </div>
+
+      <p class="pub-group-title">Drafts / Not Published</p>
+      <div class="pub-list">
+        <article class="pub-item draft fade-up">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <div class="pub-title">Title of a Paper That Was Submitted and Rejected</div>
+            <div class="pub-authors"><strong>Your Name</strong>, Co-Author H</div>
+            <div class="pub-meta">Submitted to <em>[Journal Name]</em> · Rejected [Month Year]<span class="sep"> · </span>Available as working paper</div>
+            <div class="pub-actions">
+              <span class="badge badge-draft">✕ Draft / Not Published</span>
+              <a href="#" class="pub-link">Draft PDF ↗</a>
+              <button class="abstract-toggle" onclick="toggleAbstract(this)">+ Abstract</button>
+            </div>
+            <div class="abstract-body">Abstract for this draft. Note: not peer-reviewed; made available as a working paper only.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PUBLISHED -->
+    <div class="pub-group" id="tab-pub">
+      <div class="pub-list">
+        <article class="pub-item published"><div class="pub-year">2024</div><div class="pub-content"><div class="pub-title">Full Title of Your Published Journal Article</div><div class="pub-authors"><strong>Your Name</strong>, Co-Author A, Co-Author B</div><div class="pub-meta"><em>Journal of [Field Studies]</em><span class="sep"> · </span>Vol. 12, No. 3</div><div class="pub-actions"><span class="badge badge-published">● Published</span><a href="#" class="pub-link">PDF ↗</a></div></div></article>
+        <article class="pub-item published"><div class="pub-year">2023</div><div class="pub-content"><div class="pub-title">Title of Another Published Article</div><div class="pub-authors">Co-Author A, <strong>Your Name</strong>, Co-Author C</div><div class="pub-meta"><em>Annual Review of [Your Field]</em><span class="sep"> · </span>Vol. 8</div><div class="pub-actions"><span class="badge badge-published">● Published</span><a href="#" class="pub-link">PDF ↗</a></div></div></article>
+        <article class="pub-item published"><div class="pub-year">2024</div><div class="pub-content"><div class="pub-title">Conference Paper Title</div><div class="pub-authors"><strong>Your Name</strong>, Co-Author D</div><div class="pub-meta"><em>Proceedings of [Conference]</em><span class="sep"> · </span>pp. 234–241</div><div class="pub-actions"><span class="badge badge-published">● Published</span><a href="#" class="pub-link">PDF ↗</a></div></div></article>
+        <article class="pub-item published"><div class="pub-year">2023</div><div class="pub-content"><div class="pub-title">Public-Facing Magazine Article</div><div class="pub-authors"><strong>Your Name</strong></div><div class="pub-meta"><em>[Magazine Name]</em></div><div class="pub-actions"><span class="badge badge-published">● Published</span><a href="#" class="pub-link">Read ↗</a></div></div></article>
+      </div>
+    </div>
+
+    <!-- REVIEW -->
+    <div class="pub-group" id="tab-review">
+      <div class="pub-list">
+        <article class="pub-item under-review"><div class="pub-year">2025</div><div class="pub-content"><div class="pub-title">Title of Article Currently Under Review</div><div class="pub-authors"><strong>Your Name</strong>, Co-Author E</div><div class="pub-meta">Submitted to <em>[Target Journal]</em><span class="sep"> · </span>Under review since [Month Year]</div><div class="pub-actions"><span class="badge badge-review">◐ Under Review</span><a href="#" class="pub-link">Preprint ↗</a></div></div></article>
+        <article class="pub-item under-review"><div class="pub-year">2025</div><div class="pub-content"><div class="pub-title">Second Manuscript in the Review Process</div><div class="pub-authors">Co-Author F, <strong>Your Name</strong>, Co-Author G</div><div class="pub-meta">In preparation for <em>[Target Journal]</em></div><div class="pub-actions"><span class="badge badge-review">◐ In Preparation</span></div></div></article>
+      </div>
+    </div>
+
+    <!-- DRAFT -->
+    <div class="pub-group" id="tab-draft">
+      <div class="pub-list">
+        <article class="pub-item draft"><div class="pub-year">2024</div><div class="pub-content"><div class="pub-title">Title of a Paper That Was Submitted and Rejected</div><div class="pub-authors"><strong>Your Name</strong>, Co-Author H</div><div class="pub-meta">Submitted to <em>[Journal]</em> · Rejected [Month Year]</div><div class="pub-actions"><span class="badge badge-draft">✕ Draft / Not Published</span><a href="#" class="pub-link">Draft PDF ↗</a></div></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONFERENCES & SPEAKING — GALLERY ═══ -->
+<section id="talks">
+  <div class="container">
+    <div class="section-eyebrow">Dissemination</div>
+    <h2 class="section-title">Conferences & Speaking</h2>
+
+    <!-- Stats -->
+    <div class="gallery-stats fade-up">
+      <div class="gallery-stat"><div class="num">12</div><div class="lbl">Total Events</div></div>
+      <div class="gallery-stat"><div class="num">6</div><div class="lbl">Invited Talks</div></div>
+      <div class="gallery-stat"><div class="num">3</div><div class="lbl">Poster Sessions</div></div>
+      <div class="gallery-stat"><div class="num">8</div><div class="lbl">Countries</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="gallery-filters" role="group" aria-label="Filter by event type">
+      <button class="gf-btn active" onclick="filterGallery('all',this)">All</button>
+      <button class="gf-btn" onclick="filterGallery('invited',this)">Invited Talks</button>
+      <button class="gf-btn" onclick="filterGallery('poster',this)">Posters</button>
+      <button class="gf-btn" onclick="filterGallery('workshop',this)">Workshops</button>
+      <button class="gf-btn" onclick="filterGallery('panel',this)">Panels</button>
+    </div>
+
+    <!-- Gallery grid — click any card to open lightbox -->
+    <div class="gallery-grid" id="gallery-grid">
+
+      <!-- 1 · Wide featured keynote -->
+      <div class="gallery-item wide fade-up" data-type="invited"
+           data-title="Keynote: Title of Your Major Keynote or Invited Lecture"
+           data-event="[Conference Name] · [City, Country] · [Month Year]"
+           data-desc="A 2–3 sentence description of the talk, its significance, and the audience size. Was this a keynote at a flagship conference? What was the core argument you presented?"
+           onclick="openLightbox(this)">
+        <!--
+          ADD PHOTO: replace the gallery-bg div below with:
+          <img src="assets/talks/keynote.jpg" alt="Keynote talk" class="gallery-img">
+        -->
+        <div class="gallery-bg gallery-bg-1">🎤</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-invited">★ Keynote</span>
+          <div class="gallery-title">Keynote: Title of Your Major Invited Lecture</div>
+          <div class="gallery-meta"><span>[Conference Name]</span><div class="dot"></div><span>[City, Country]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details about this talk.</div>
+        </div>
+      </div>
+
+      <!-- 2 · Tall poster -->
+      <div class="gallery-item tall fade-up" data-type="poster"
+           data-title="Poster: Title of Poster Presentation at International Conference"
+           data-event="[Conference Name] · [City, Country] · [Month Year]"
+           data-desc="Describe the poster: what research was presented, the venue, the audience, and any awards or notable interactions. Was it a competitive session?"
+           onclick="openLightbox(this)">
+        <div class="gallery-bg gallery-bg-2">📊</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-poster">◆ Poster</span>
+          <div class="gallery-title">Poster: Title of Poster at International Conference</div>
+          <div class="gallery-meta"><span>[Conference Name]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+      <!-- 3 · Normal -->
+      <div class="gallery-item fade-up" data-type="invited"
+           data-title="Invited Talk: Title at Department Seminar Series"
+           data-event="[University / Department] · [City] · [Month Year]"
+           data-desc="Description of this invited seminar: the host institution, the topic, and the audience. Include how it fits into your research trajectory."
+           onclick="openLightbox(this)">
+        <div class="gallery-bg gallery-bg-3">🏛️</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-invited">★ Invited Talk</span>
+          <div class="gallery-title">Department Seminar at [University]</div>
+          <div class="gallery-meta"><span>[University]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+      <!-- 4 · Workshop -->
+      <div class="gallery-item fade-up" data-type="workshop"
+           data-title="Workshop: Facilitating a Methods Training Session"
+           data-event="[Workshop Series / Host] · [City or Online] · [Month Year]"
+           data-desc="Description of the workshop: what methods were taught, who attended (PhD students, faculty, practitioners), the format (half-day / full-day), and any materials produced."
+           onclick="openLightbox(this)">
+        <div class="gallery-bg gallery-bg-4">⚙️</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-workshop">▲ Workshop</span>
+          <div class="gallery-title">Workshop: [Methods] Training Session</div>
+          <div class="gallery-meta"><span>[Host Institution]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+      <!-- 5 · Wide panel -->
+      <div class="gallery-item wide fade-up" data-type="panel"
+           data-title="Panel: Title of Panel Discussion or Roundtable"
+           data-event="[Conference or Event Name] · [City, Country] · [Month Year]"
+           data-desc="Description of the panel: the topic, co-panellists, moderator, and the discussion's key themes. How did it contribute to ongoing debates in your field?"
+           onclick="openLightbox(this)">
+        <!--
+          ADD PHOTO: <img src="assets/talks/panel.jpg" alt="Panel discussion" class="gallery-img">
+        -->
+        <div class="gallery-bg gallery-bg-5">💬</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-panel">◉ Panel</span>
+          <div class="gallery-title">Panel: Title of Panel Discussion at [Event Name]</div>
+          <div class="gallery-meta"><span>[Event Name]</span><div class="dot"></div><span>[City]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+      <!-- 6 · Poster -->
+      <div class="gallery-item fade-up" data-type="poster"
+           data-title="Poster: Title at Regional Specialist Conference"
+           data-event="[Conference Name] · [City] · [Month Year]"
+           data-desc="Description of this poster at a regional or specialist conference. What was the research focus and the level of engagement from attendees?"
+           onclick="openLightbox(this)">
+        <div class="gallery-bg gallery-bg-6">📌</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-poster">◆ Poster</span>
+          <div class="gallery-title">Poster at [Regional Conference]</div>
+          <div class="gallery-meta"><span>[Conference]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+      <!-- 7 · Invited public lecture -->
+      <div class="gallery-item fade-up" data-type="invited"
+           data-title="Public Lecture: Title at a Public or Professional Venue"
+           data-event="[Venue / Series] · [City] · [Month Year]"
+           data-desc="Description of a public or practitioner-facing talk. Who was the audience? Was it recorded or covered by media? What was the key message for a non-specialist audience?"
+           onclick="openLightbox(this)">
+        <div class="gallery-bg gallery-bg-7">🌐</div>
+        <div class="gallery-add-hint">📷 Add photo</div>
+        <div class="gallery-overlay">
+          <span class="gallery-type gtype-invited">★ Public Lecture</span>
+          <div class="gallery-title">Public Lecture: [Title] at [Venue]</div>
+          <div class="gallery-meta"><span>[Venue]</span><div class="dot"></div><span>20XX</span></div>
+          <div class="gallery-detail">Click to view full details.</div>
+        </div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+    <p style="text-align:center;margin-top:1.75rem;font-size:.78rem;color:var(--muted);">
+      💡 <em>To add real photos, replace each <code>gallery-bg</code> div with an <code>&lt;img&gt;</code> tag — see HTML comments.</em>
+    </p>
+  </div>
+</section>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Event details" onclick="if(event.target===this)closeLightbox()">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <div class="lightbox-type"  id="lb-type"></div>
+    <div class="lightbox-title" id="lb-title"></div>
+    <div class="lightbox-event" id="lb-event"></div>
+    <div class="lightbox-desc"  id="lb-desc"></div>
+    <div class="lightbox-footer">
+      <a href="#" class="btn btn-teal" style="font-size:.72rem;padding:.6rem 1.2rem;">Slides / Materials ↗</a>
+      <a href="#" class="btn btn-outline" style="font-size:.72rem;padding:.6rem 1.2rem;color:rgba(224,242,254,.6);">Recording ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <p class="contact-intro">I welcome inquiries about my research, potential collaborations, speaking invitations, and PhD supervision opportunities.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <label>Email</label>
+            <a href="mailto:your.email@university.edu">your.email@university.edu</a>
+          </div>
+          <div class="contact-item">
+            <label>Office</label>
+            <span>Room [Number], [Building]<br>[University], [Department]<br>[City, Country, Postcode]</span>
+          </div>
+          <div class="contact-item">
+            <label>Online Profiles</label>
+            <div class="social-row">
+              <a href="https://linkedin.com/in/yourprofile" class="social-btn linkedin" target="_blank" rel="noopener">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <a href="#" class="social-btn" target="_blank" rel="noopener">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="social-btn" target="_blank" rel="noopener">Google Scholar</a>
+              <a href="#" class="social-btn" target="_blank" rel="noopener">ORCID</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="contact-form">
+          <div class="form-group"><label for="c-name">Your Name</label><input type="text" id="c-name" placeholder="First Last" /></div>
+          <div class="form-group"><label for="c-email">Email Address</label><input type="email" id="c-email" placeholder="you@institution.edu" /></div>
+          <div class="form-group"><label for="c-subject">Subject</label><input type="text" id="c-subject" placeholder="e.g., Collaboration Inquiry / Speaking Invitation" /></div>
+          <div class="form-group"><label for="c-msg">Message</label><textarea id="c-msg" placeholder="Your message…"></textarea></div>
+          <p class="form-note">ℹ To enable form submission, connect to <a href="https://formspree.io" target="_blank" rel="noopener" style="color:rgba(20,184,166,.7)">Formspree</a> or Netlify Forms.</p>
+          <button class="btn btn-teal" style="width:100%;justify-content:center;" onclick="alert('Connect this form to Formspree or Netlify Forms to enable submissions.')">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© <span id="year"></span> <span>Your Name</span> · [University / Affiliation] · Academic Portfolio</p>
+</footer>
+
+<script>
+  /* Year */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Nav scroll */
+  const nav   = document.getElementById('main-nav');
+  const secs  = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+
+  /* Mobile nav */
+  function toggleNav(btn) {
+    const ul = document.getElementById('nav-links');
+    btn.setAttribute('aria-expanded', ul.classList.toggle('open'));
+  }
+  links.forEach(a => a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open')));
+
+  /* Publication tabs */
+  function switchTab(name, btn) {
+    document.querySelectorAll('.pub-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+    document.querySelectorAll('.pub-group').forEach(g => g.classList.remove('active'));
+    btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+
+  /* Abstract toggle */
+  function toggleAbstract(btn) {
+    const ab = btn.closest('.pub-content').querySelector('.abstract-body');
+    btn.textContent = ab.classList.toggle('open') ? '− Abstract' : '+ Abstract';
+  }
+
+  /* Gallery filter */
+  function filterGallery(type, btn) {
+    document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.style.display = (type === 'all' || item.dataset.type === type) ? '' : 'none';
+    });
+  }
+
+  /* Lightbox */
+  const typeMap  = { invited:'★ Invited Talk', poster:'◆ Poster Presentation', workshop:'▲ Workshop', panel:'◉ Panel Discussion' };
+  const colorMap = { invited:'#5eead4', poster:'#7dd3fc', workshop:'#a5f3fc', panel:'#bae6fd' };
+  function openLightbox(el) {
+    const t = el.dataset.type;
+    const c = colorMap[t] || '#5eead4';
+    document.getElementById('lb-type').innerHTML = `<span class="gallery-type" style="color:${c};border-color:${c};background:rgba(94,234,212,.08)">${typeMap[t]||t}</span>`;
+    document.getElementById('lb-title').textContent = el.dataset.title || '';
+    document.getElementById('lb-event').textContent = el.dataset.event || '';
+    document.getElementById('lb-desc').textContent  = el.dataset.desc  || '';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* Scroll-triggered fade-in */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.transitionDelay = (i % 5) * 0.07 + 's';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
