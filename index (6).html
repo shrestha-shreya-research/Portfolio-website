@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shreya Shrestha | Urban Planning Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:#1A2340;--navy2:#232D4B;--teal:#34D399;--teal-lt:#D1FAE5;--teal-dk:#059669;
+  --blue:#4A90C4;--blue-lt:#DBEAFE;--blue-dk:#2563A8;
+  --bg:#F5F6F8;--white:#FFFFFF;--g2:#F3F4F6;--g3:#E5E7EB;--g4:#D1D5DB;
+  --g5:#9CA3AF;--g6:#6B7280;--g7:#374151;--g8:#111827;
+  --sh0:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
+  --sh1:0 4px 16px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.06);
+  --sh2:0 10px 40px rgba(0,0,0,.12),0 4px 12px rgba(0,0,0,.08);
+  --r:12px;--r2:16px;--r3:20px;--rs:8px;--nav:64px;
+  --font:'Poppins',system-ui,sans-serif;--t:0.22s ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--g8);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}ul{list-style:none}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);background:var(--navy);
+  display:flex;align-items:center;padding:0 2.5rem;gap:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.nav-logo{font-size:.95rem;font-weight:600;color:#fff;white-space:nowrap;margin-right:auto;letter-spacing:.01em;font-family:var(--font)}
+.nav-logo span{color:#fff}
+.nav-links{display:flex;gap:.2rem}
+.nav-links a{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.65);
+  padding:.4rem .85rem;border-radius:var(--rs);transition:color var(--t),background var(--t)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-links a.active{background:rgba(52,211,153,.15);color:var(--teal)}
+.nav-search{display:flex;align-items:center;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--rs);padding:.32rem .7rem;gap:.35rem}
+.nav-search input{background:none;border:none;outline:none;color:#fff;font-family:var(--font);
+  font-size:.78rem;width:130px}
+.nav-search input::placeholder{color:rgba(255,255,255,.38)}
+.nav-search svg{color:rgba(255,255,255,.42);flex-shrink:0}
+.nav-r{display:flex;align-items:center;gap:.65rem}
+.nav-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.65);transition:background var(--t)}
+.nav-icon:hover{background:rgba(255,255,255,.15)}
+.nav-av{width:34px;height:34px;border-radius:50%;background:var(--teal);display:flex;
+  align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;
+  border:2px solid rgba(255,255,255,.22);cursor:pointer;flex-shrink:0}#ham{display:none;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.8)}
+#mmenu{display:none;position:fixed;top:var(--nav);left:0;right:0;z-index:199;
+  background:var(--navy2);padding:1rem 1.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08)}
+#mmenu.open{display:block}
+#mmenu a{display:block;color:rgba(255,255,255,.75);font-size:.9rem;padding:.55rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07)}
+
+/* LAYOUT */
+main{padding-top:var(--nav)}
+.ps{padding:52px 2.5rem}.psi{max-width:1080px;margin:0 auto}
+.sh{margin-bottom:2rem}
+.stag{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--teal);color:#fff;
+  padding:.22rem .7rem;border-radius:999px;margin-bottom:.5rem}
+.stitle{font-size:1.45rem;font-weight:700;color:var(--g8)}
+.ssub{font-size:.86rem;color:var(--g6);margin-top:.28rem}
+.sdiv{width:38px;height:3px;background:var(--teal);border-radius:2px;margin-top:.65rem}
+
+/* HERO — full-bleed dark navy, text left / photo right */
+#hero{
+  background:linear-gradient(135deg,#0f1825 0%,#1A2340 45%,#1e2d52 100%);
+  min-height:calc(100vh - var(--nav));
+  display:flex;align-items:center;
+  padding:64px 5%;
+  position:relative;overflow:hidden;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 80% at 75% 50%,rgba(52,211,153,.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:1080px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 300px;
+  gap:3rem;align-items:center;position:relative;z-index:1;
+}
+.hero-left{display:flex;flex-direction:column;gap:1.4rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;
+  border:1.5px solid rgba(52,211,153,.55);
+  color:rgba(255,255,255,.85);
+  font-size:.72rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  padding:.32rem 1rem;border-radius:999px;width:fit-content;
+  background:rgba(52,211,153,.1);
+}
+.hero-name{
+  font-size:clamp(1.6rem,3.2vw,2.5rem);font-weight:300;
+  line-height:1.2;color:#fff;letter-spacing:.03em;
+  font-family:-apple-system,'SF Pro Display','Helvetica Neue',var(--font);
+}
+.hero-name .last{color:#fff;font-weight:300;}
+.hero-quote{
+  font-size:1rem;color:rgba(255,255,255,.68);line-height:1.75;
+  border-left:3px solid var(--teal);padding-left:1.1rem;
+  max-width:520px;
+}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.3rem;}
+.pb{display:inline-flex;align-items:center;gap:.38rem;font-size:.82rem;font-weight:600;
+  padding:.6rem 1.25rem;border-radius:var(--rs);transition:all var(--t);cursor:pointer;border:none;}
+.pb-p{background:var(--teal);color:#fff;}.pb-p:hover{background:var(--teal-dk);}
+.pb-o{background:transparent;color:rgba(255,255,255,.82);border:1.5px solid rgba(255,255,255,.3);}
+.pb-o:hover{border-color:var(--teal);color:var(--teal);}
+
+/* Photo card right side */
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:.9rem;}
+.pimgw{
+  width:240px;height:280px;border-radius:18px;overflow:hidden;
+  border:2px solid rgba(52,211,153,.35);
+  box-shadow:0 12px 48px rgba(0,0,0,.35);
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+}
+.pimgw img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.pph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:.55rem;color:rgba(255,255,255,.35);font-size:.72rem;
+  text-align:center;padding:1rem;}
+.pph svg{opacity:.28;}
+.hero-li-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.7);border-radius:var(--rs);
+  font-size:.78rem;font-weight:600;padding:.5rem 1.2rem;
+  transition:all var(--t);cursor:pointer;text-decoration:none;
+  width:240px;justify-content:center;
+}
+.hero-li-btn:hover{background:rgba(52,211,153,.15);border-color:var(--teal);color:var(--teal);}
+
+/* keep .pt for about section tags */
+.pt{font-size:.7rem;font-weight:500;background:var(--teal);color:#fff;
+  padding:.22rem .65rem;border-radius:999px;border:none;}
+
+/* ABOUT */
+#about{background:var(--white);border-top:1px solid var(--g3)}
+.ag{display:grid;grid-template-columns:1fr 270px;gap:2.5rem;align-items:start}
+.ag p{font-size:.88rem;color:var(--g6);margin-bottom:.95rem}
+.ic{background:var(--bg);border:1px solid var(--g3);border-radius:var(--r2);padding:1.3rem}
+.ic+.ic{margin-top:.9rem}
+.ict{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--g6);margin-bottom:.85rem;padding-bottom:.45rem;border-bottom:2px solid var(--teal-lt)}
+.er{margin-bottom:.7rem}
+.er strong{display:block;font-size:.83rem;font-weight:600;color:var(--g8)}
+.er span{font-size:.76rem;color:var(--g5)}
+
+/* PUBLICATIONS */
+#publications{background:var(--bg)}
+.pg{margin-bottom:1.8rem}
+.pgl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--g5);margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:1px solid var(--g3)}
+.pbc{background:var(--white);border:1px solid var(--g3);border-radius:var(--r2);
+  padding:1rem 1.2rem;margin-bottom:.55rem;display:flex;gap:.85rem;align-items:flex-start;
+  box-shadow:var(--sh0);transition:box-shadow var(--t),transform var(--t)}
+.pbc:hover{box-shadow:var(--sh1);transform:translateY(-1px)}
+.pbs{flex-shrink:0;font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:.2rem .58rem;border-radius:999px;white-space:nowrap;margin-top:.1rem}
+.sp{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7}
+.sr{background:#FEF3C7;color:#92400E;border:1px solid #FCD34D}
+.sd{background:#F3F4F6;color:#4B5563;border:1px solid #D1D5DB}
+.sc{background:#DBEAFE;color:#1E40AF;border:1px solid #93C5FD}
+.pbt{font-size:.9rem;font-weight:600;color:var(--g8);margin-bottom:.22rem;line-height:1.4}
+.pbm{font-size:.76rem;color:var(--g5);margin-bottom:.3rem}
+.pbm em{font-style:normal;color:var(--teal-dk)}
+.pbn{font-size:.74rem;color:var(--g5);margin-top:.22rem}
+.pbl{display:inline-flex;align-items:center;gap:.22rem;font-size:.74rem;font-weight:600;color:var(--teal-dk)}
+.pbl:hover{text-decoration:underline}
+
+/* PROJECTS */
+#projects{background:var(--white)}
+.prg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.prc{background:var(--white);border:1px solid var(--g3);border-radius:var(--r2);overflow:hidden;
+  box-shadow:var(--sh0);transition:box-shadow var(--t),transform var(--t);display:flex;flex-direction:column}
+.prc:hover{box-shadow:var(--sh1);transform:translateY(-3px)}
+.pri{width:100%;height:148px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.pril{position:absolute;top:9px;left:9px;font-size:.59rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;background:rgba(52,211,153,.88);color:#fff;
+  padding:.18rem .52rem;border-radius:999px}
+.pri svg{opacity:.18}
+.ta{background:linear-gradient(135deg,#1a3a5c,#2a5a8a)}
+.tb{background:linear-gradient(135deg,#1a4a3a,#2a7a60)}
+.tc{background:linear-gradient(135deg,#3a1a4a,#6a3a8a)}
+.td{background:linear-gradient(135deg,#4a2a1a,#8a5a3a)}
+.te{background:linear-gradient(135deg,#1a3a2a,#3a6a5a)}
+.prb{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column;gap:.4rem}
+.prcat{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dk)}
+.prtitle{font-size:.9rem;font-weight:700;color:var(--g8);line-height:1.3}
+.prdesc{font-size:.79rem;color:var(--g6);line-height:1.6;flex:1}
+.prtag{display:inline-block;margin-top:.55rem;font-size:.65rem;font-weight:600;
+  background:var(--teal);color:#fff;padding:.16rem .52rem;border-radius:999px}
+
+/* CONFERENCES ALBUM */
+#conferences{background:var(--bg)}
+.alg{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.alc{background:var(--white);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh0);
+  transition:box-shadow var(--t),transform var(--t)}
+.alc:hover{box-shadow:var(--sh1);transform:translateY(-3px)}
+.ali{width:100%;height:128px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.ali svg{opacity:.18}
+.c1{background:linear-gradient(135deg,#0f2647,#1e4080)}
+.c2{background:linear-gradient(135deg,#0f3a2a,#1a6a4a)}
+.c3{background:linear-gradient(135deg,#2a1a0f,#5a3a1a)}
+.c4{background:linear-gradient(135deg,#1a0f2a,#4a2a6a)}
+.c5{background:linear-gradient(135deg,#0f2a3a,#1a5a6a)}
+.c6{background:linear-gradient(135deg,#2a2a0f,#6a6a1a)}
+.atype{position:absolute;top:8px;left:8px;font-size:.58rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;background:rgba(0,0,0,.42);color:#fff;
+  padding:.16rem .48rem;border-radius:999px}
+.alb{padding:.8rem .9rem}
+.alyr{font-size:.68rem;font-weight:600;color:var(--teal-dk);margin-bottom:.18rem}
+.altitle{font-size:.8rem;font-weight:600;color:var(--g8);line-height:1.35}
+.alwhere{font-size:.7rem;color:var(--g5);margin-top:.18rem}
+.awrow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.awc{background:var(--white);border-radius:var(--r2);padding:1rem 1.1rem;
+  border-left:4px solid #F59E0B;box-shadow:var(--sh0);display:flex;gap:.7rem;align-items:flex-start}
+.awi{width:32px;height:32px;flex-shrink:0;background:#FEF3C7;border-radius:var(--rs);
+  display:flex;align-items:center;justify-content:center;color:#D97706}
+.awt strong{display:block;font-size:.85rem;font-weight:600;color:var(--g8)}
+.awt span{font-size:.74rem;color:var(--g5)}
+
+/* CONTACT */
+#contact{background:var(--navy)}
+#contact .stag{background:rgba(52,211,153,.2);color:var(--teal)}
+#contact .stitle{color:#fff}
+#contact .ssub{color:rgba(255,255,255,.48)}
+#contact .sdiv{background:var(--teal)}
+.ctg{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem}
+.cti p{font-size:.86rem;color:rgba(255,255,255,.52);margin-bottom:1.4rem;line-height:1.75}
+.ctii{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.85rem}
+.ctiic{width:34px;height:34px;flex-shrink:0;background:rgba(52,211,153,.12);
+  border:1px solid rgba(52,211,153,.3);border-radius:var(--rs);
+  display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.ctiic svg{width:14px;height:14px}
+.ctiit{font-size:.83rem;color:rgba(255,255,255,.68);padding-top:.48rem}
+.ctiit a{color:var(--teal)}.ctiit a:hover{text-decoration:underline}
+.cf{display:flex;flex-direction:column;gap:.75rem}
+.cfr{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.cfg{display:flex;flex-direction:column;gap:.28rem}
+.cfg label{font-size:.7rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:rgba(255,255,255,.38)}
+.cfg input,.cfg textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--rs);color:#fff;font-family:var(--font);font-size:.84rem;
+  padding:.58rem .82rem;outline:none;transition:border-color var(--t),background var(--t)}
+.cfg input::placeholder,.cfg textarea::placeholder{color:rgba(255,255,255,.26)}
+.cfg input:focus,.cfg textarea:focus{border-color:var(--teal);background:rgba(255,255,255,.1)}
+.cfg textarea{resize:vertical;min-height:96px}
+.cfsub{background:var(--teal);color:#fff;font-family:var(--font);font-size:.84rem;
+  font-weight:600;padding:.65rem 1.5rem;border:none;border-radius:var(--rs);
+  cursor:pointer;transition:background var(--t);align-self:flex-start}
+.cfsub:hover{background:var(--teal-dk)}#cfm{display:none;font-size:.78rem;color:var(--teal);margin-top:.28rem}
+
+footer{background:#111827;border-top:1px solid rgba(255,255,255,.06);
+  padding:1.2rem 2.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.28)}
+footer a{color:rgba(255,255,255,.38)}
+
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:920px){
+  .pcard{grid-template-columns:1fr}
+  .pcl{padding:1.8rem 1.8rem 1.3rem}
+  .pimgw{width:155px;height:165px}
+  .ag{grid-template-columns:1fr}
+  .prg{grid-template-columns:1fr 1fr}
+  .alg{grid-template-columns:1fr 1fr 1fr}
+  .ctg{grid-template-columns:1fr}
+  .awrow{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .nav-links,.nav-search{display:none}
+  #ham{display:flex}
+  .prg{grid-template-columns:1fr}
+  .alg{grid-template-columns:1fr 1fr}
+  .cfr{grid-template-columns:1fr}
+  .ps{padding:38px 1.2rem}
+  #nav{padding:0 1.2rem}
+}
+@media(max-width:480px){.alg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <span class="nav-logo">Shreya <span>Shrestha</span></span>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#projects" class="active">Research</a></li>
+    <li><a href="#conferences">Dissemination</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search…" aria-label="Search"/>
+  </div>
+  <div class="nav-r">
+    <button class="nav-icon" aria-label="Notifications">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+    </button>
+    <div class="nav-av" title="Shreya Shrestha">SS</div>
+  </div>
+  <button id="ham" aria-label="Menu" onclick="document.getElementById('mmenu').classList.toggle('open')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</nav>
+<div id="mmenu">
+  <a href="#hero" onclick="this.parentElement.classList.remove('open')">Home</a>
+  <a href="#publications" onclick="this.parentElement.classList.remove('open')">Publications</a>
+  <a href="#projects" onclick="this.parentElement.classList.remove('open')">Research</a>
+  <a href="#conferences" onclick="this.parentElement.classList.remove('open')">Dissemination</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+<div class="hero-inner rv">
+
+  <!-- LEFT: text -->
+  <div class="hero-left">
+    <span class="hero-badge">PhD Aspirant in Urban Planning</span>
+    <h1 class="hero-name">
+      Shreya<br/>
+      <span class="last">Shrestha</span>
+    </h1>
+    <p class="hero-quote">I aim to strengthen rural communities through affordable housing, creating stable, resilient, and sustainable neighborhoods that thrive alongside urban centers, using evidence-based research to guide practical, impactful solutions.</p>
+    <div class="hero-btns">
+      <a href="#publications" class="pb pb-p">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
+        View Publications
+      </a>
+      <a href="resume.pdf" download class="pb pb-o">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Resume
+      </a>
+      <a href="#contact" class="pb pb-o">Contact</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: photo card + linkedin tab -->
+  <div class="hero-right">
+    <div class="pimgw">
+      <!--
+        TO ADD HEADSHOT:
+        1. Save image as headshot.jpg in the same folder as index.html
+        2. Replace the div.pph below with: <img src="headshot.jpg" alt="Shreya Shrestha"/>
+      -->
+       <img src="headshot.jpg" alt="Shreya Shrestha"/> 
+    </div>
+    <a href="https://www.linkedin.com/in/shreya-shrestha-planner" target="_blank" rel="noopener" class="hero-li-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+      LinkedIn Profile
+    </a>
+  </div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="ps" style="background:var(--white);border-top:1px solid var(--g3)">
+<div class="psi">
+  <div class="sh rv">
+    <span class="stag">About Me</span>
+    <h2 class="stitle">Background &amp; Experience</h2>
+    <div class="sdiv"></div>
+  </div>
+  <div class="ag">
+    <div class="rv">
+      <p>I am a Housing Specialist at the <strong>Housing Assistance Council</strong>, advocating for capacity building through training and technical assistance in rural affordable housing. My work sits at the intersection of housing policy and rural community sustainability, with a particular focus on how targeted housing interventions influence neighborhood stability and moderate-income household retention, drawing on spatial analysis, statistical modeling, and GIS-based approaches.</p>
+      <p>Prior to this role, I earned a Master's degree in City and Metropolitan Planning from the University of Utah and worked as a GIS Analyst at the Utah Center for Civic Improvement, where I contributed to projects mapping ADUs in Salt Lake City. My work has been shaped by collaboration with nonprofit organizations, local governments, and community stakeholders to support equitable and sustainable housing solutions.</p>
+      <p>Outside of my professional work, I am committed to community engagement and translating policy research into actionable strategies. I believe strongly in evidence-based planning that strengthens rural communities and ensures vulnerable populations have access to safe, stable, and sustainable housing.</p>
+    </div>
+    <div class="rv">
+      <div class="ic">
+        <div class="ict">Education</div>
+        <div class="er"><strong>Master's in City &amp; Metropolitan Planning</strong><span>University of Utah &middot; 2023</span></div>
+        <div class="er"><strong>Bachelor's in Architecture</strong><span>Tribhuvan University &middot; 2018</span></div>
+      </div>
+      <div class="ic">
+        <div class="ict">Research Interests</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.38rem">
+          <span class="pt">Affordable Housing</span>
+          <span class="pt">Rural Planning</span>
+          <span class="pt">Community Development</span>
+          <span class="pt">Housing Policy</span>
+          <span class="pt">GIS &amp; Spatial Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="ps">
+<div class="psi">
+  <div class="sh rv">
+    <span class="stag">Scholarship</span>
+    <h2 class="stitle">Publications</h2>
+    <p class="ssub">Peer-reviewed work, conference proceedings, and works in progress</p>
+    <div class="sdiv"></div>
+  </div>
+
+  <div class="pg rv">
+    <div class="pgl">Peer-Reviewed Journal</div>
+    <div class="pbc">
+      <span class="pbs sp">Published</span>
+      <div>
+        <div class="pbt">Introducing Intercity Bus Terminal as a Solution to Traffic Congestion in Kathmandu</div>
+        <div class="pbm">Shrestha, S. (2024) &middot; <em>KEC Journal of Science and Engineering (KJSE)</em></div>
+        <a class="pbl" href="https://www.nepjol.info/index.php/kjse/article/view/60536/45222" target="_blank" rel="noopener">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          View Paper
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg rv">
+    <div class="pgl">Conference Proceeding</div>
+    <div class="pbc">
+      <span class="pbs sc">Proceeding</span>
+      <div>
+        <div class="pbt">Introducing Intercity Bus Terminal as a Solution to Traffic Congestion in Kathmandu</div>
+        <div class="pbm">Shrestha, S. (2024) &middot; <em>Conference Proceedings, Kathmandu Engineering College</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg rv">
+    <div class="pgl">Under Review / In Preparation</div>
+    <div class="pbc">
+      <span class="pbs sr">Under Review</span>
+      <div>
+        <div class="pbt">Rural Perspectives in Climate-Resilient Planning: Affordable Housing as Climate Infrastructure</div>
+        <div class="pbm">Shrestha, S. &middot; <em>Emerging New Urbanists Exchange (Substack)</em></div>
+        <div class="pbn">Article submitted; currently under editorial review.</div>
+<a class="pbl" href="#" target="_blank" rel="noopener">
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+  View Paper
+</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg rv">
+    <div class="pgl">Draft / Not Published</div>
+    <div class="pbc">
+      <span class="pbs sd">Draft</span>
+      <div>
+        <div class="pbt">Mapping Accessory Dwelling Units in Salt Lake City</div>
+        <div class="pbm">Shrestha, S. &middot; Work in Progress</div>
+        <div class="pbn">Research examining spatial patterns and zoning conditions influencing ADU development in Salt Lake City.</div>
+<a class="pbl" href="#" target="_blank" rel="noopener">
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+  View draft
+</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="ps" style="background:var(--white)">
+<div class="psi">
+  <div class="sh rv">
+    <span class="stag">Applied Work</span>
+    <h2 class="stitle">Research Projects</h2>
+    <p class="ssub">Spatial analysis, policy research, and community planning</p>
+    <div class="sdiv"></div>
+  </div>
+  <div class="prg">
+
+    <div class="prc rv">
+      <div class="pri ta">
+        <span class="pril">Capstone Research</span>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <!-- To add image: replace the svg above with <img src="adu-project.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="prb">
+        <div class="prcat">Capstone Research</div>
+        <div class="prtitle">Spatial Analysis of ADU Potential – Salt Lake City</div>
+        <div class="prdesc">Examines zoning, spatial patterns, and neighborhood characteristics influencing ADU development. Combines GIS analysis and policy evaluation to identify areas with high potential for ADU expansion, supporting gentle density and affordable housing strategies.</div>
+        <span class="prtag">Planned Publication</span>
+      </div>
+    </div>
+
+    <div class="prc rv">
+      <div class="pri tb">
+        <span class="pril">Graduate Research</span>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        <!-- <img src="workshop.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="prb">
+        <div class="prcat">University of Utah</div>
+        <div class="prtitle">Graduate Research Workshop – Traffic Safety Analysis</div>
+        <div class="prdesc">Examined pedestrian crashes in Salt Lake County using ATSPM data and R programming, applying Poisson and Negative Binomial regression models. Findings highlight pedestrian counts, income levels, and speed limits as key predictors of crash risk.</div>
+        <span class="prtag">Aug–Dec 2024</span>
+      </div>
+    </div>
+
+    <div class="prc rv">
+      <div class="pri tc">
+        <span class="pril">Indigenous Planning</span>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <circle cx="12" cy="12" r="9"/><path d="M12 3v9l4 4"/>
+        </svg>
+        <!-- <img src="navajo.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="prb">
+        <div class="prcat">Community Planning</div>
+        <div class="prtitle">Comprehensive Land Use Plan – Navajo Nation</div>
+        <div class="prdesc">Supported development of a comprehensive land use plan for the Navajo Nation as a Summer Research Assistant. Engaged in community consultation, planning research, and culturally responsive engagement in Indigenous planning processes.</div>
+        <span class="prtag">Rural Planning</span>
+      </div>
+    </div>
+
+    <div class="prc rv">
+      <div class="pri td">
+        <span class="pril">Applied Research</span>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+        <!-- <img src="ucci.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="prb">
+        <div class="prcat">Applied Research</div>
+        <div class="prtitle">ADU Development Analysis – Utah Center for Civic Improvement</div>
+        <div class="prdesc">Contributed to applied analysis of ADU development in Salt Lake City. Produced maps and research to support housing policy discussions and guide planning decisions in local jurisdictions.</div>
+        <span class="prtag">Policy &amp; GIS</span>
+      </div>
+    </div>
+
+    <div class="prc rv">
+      <div class="pri te">
+        <span class="pril">Technical Assistance</span>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        <!-- <img src="hac.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="prb">
+        <div class="prcat">Policy &amp; Practice</div>
+        <div class="prtitle">Rural Housing Capacity Building – Housing Assistance Council</div>
+        <div class="prdesc">Provide technical assistance and training to rural nonprofit organizations developing affordable housing. Focus areas include program design, housing development strategies, and capacity building to strengthen local organizations and promote sustainable rural communities.</div>
+        <span class="prtag">Ongoing</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- DISSEMINATION / CONFERENCES -->
+<section id="conferences" class="ps">
+<div class="psi">
+  <div class="sh rv">
+    <span class="stag">Dissemination</span>
+    <h2 class="stitle">Conferences &amp; Speaking</h2>
+    <p class="ssub">Panels, posters, keynotes, and community presentations</p>
+    <div class="sdiv"></div>
+  </div>
+
+  <div class="alg">
+
+    <div class="alc rv">
+      <div class="ali c1">
+        <span class="atype">Conference</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        <!-- <img src="conf-kathmandu.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2024</div>
+        <div class="altitle">Intercity Bus Terminal as a Solution to Traffic Congestion in Kathmandu</div>
+        <div class="alwhere">Kathmandu Engineering College &middot; Nepal</div>
+      </div>
+    </div>
+
+    <div class="alc rv">
+      <div class="ali c2">
+        <span class="atype">Applied Research</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        <!-- <img src="traffic-safety.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2024</div>
+        <div class="altitle">Traffic Safety Analysis Using Big Data – ATSPM &amp; Pedestrian Crash Study</div>
+        <div class="alwhere">University of Utah &middot; Salt Lake City, UT</div>
+      </div>
+    </div>
+
+    <div class="alc rv">
+      <div class="ali c3">
+        <span class="atype">Capstone</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+        </svg>
+        <!-- <img src="adu-capstone.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2023</div>
+        <div class="altitle">ADU Spatial Analysis – Planning Capstone Presentation</div>
+        <div class="alwhere">University of Utah &middot; College of Architecture + Planning</div>
+      </div>
+    </div>
+
+    <div class="alc rv">
+      <div class="ali c4">
+        <span class="atype">Community</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        </svg>
+        <!-- <img src="navajo-community.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2022</div>
+        <div class="altitle">Navajo Nation Land Use Plan – Community Consultation</div>
+        <div class="alwhere">Summer Research Assistantship &middot; Indigenous Planning</div>
+      </div>
+    </div>
+
+    <div class="alc rv">
+      <div class="ali c5">
+        <span class="atype">Workshop</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+        </svg>
+        <!-- <img src="hac-workshop.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2024</div>
+        <div class="altitle">Rural Housing Capacity Building Workshops &amp; Training Sessions</div>
+        <div class="alwhere">Housing Assistance Council &middot; National</div>
+      </div>
+    </div>
+
+    <div class="alc rv">
+      <div class="ali c6">
+        <span class="atype">Poster</span>
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+        <!-- <img src="poster.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/> -->
+      </div>
+      <div class="alb">
+        <div class="alyr">2023</div>
+        <div class="altitle">Affordable Housing &amp; Rural Community Resilience – Research Poster</div>
+        <div class="alwhere">University of Utah &middot; Planning Department</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Awards -->
+  <div class="sh rv" style="margin-top:2.2rem;margin-bottom:1rem">
+    <span class="stag">Recognition</span>
+    <h3 style="font-size:1.05rem;font-weight:700;color:var(--g8);margin-top:.35rem">Awards &amp; Scholarships</h3>
+  </div>
+  <div class="awrow">
+    <div class="awc rv">
+      <div class="awi">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+        </svg>
+      </div>
+      <div class="awt"><strong>Utah Planning Scholarship</strong><span>Aug 2024 &middot; Department of City and Metropolitan Planning, University of Utah</span></div>
+    </div>
+    <div class="awc rv">
+      <div class="awi">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <div class="awt"><strong>Nominee, KMA Education Excellence Award</strong><span>Jul 2024 &middot; Society of Consulting Architectural &amp; Engineering Firms</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="ps">
+<div class="psi">
+  <div class="sh rv">
+    <span class="stag">Get in Touch</span>
+    <h2 class="stitle">Contact</h2>
+    <p class="ssub">Open to research collaborations, PhD inquiries, and speaking invitations</p>
+    <div class="sdiv"></div>
+  </div>
+  <div class="ctg">
+    <div class="cti rv">
+      <p>I welcome inquiries related to research collaborations, speaking invitations, and PhD program opportunities in urban and rural planning, housing policy, and spatial analysis.</p>
+      <div class="ctii">
+        <div class="ctiic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="ctiit"><a href="/cdn-cgi/l/email-protection#295a415b4c5a5d41485a415b4c50481b694e44484045074a4644"><span class="__cf_email__" data-cfemail="85f6edf7e0f6f1ede4f6edf7e0fce4b7c5e2e8e4ece9abe6eae8">[email&#160;protected]</span></a></div>
+      </div>
+      <div class="ctii">
+        <div class="ctiic">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </div>
+        <div class="ctiit"><a href="https://www.linkedin.com/in/shreya-shrestha-planner" target="_blank" rel="noopener">linkedin.com/in/shreya-shrestha-planner</a></div>
+      </div>
+      <div class="ctii">
+        <div class="ctiic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="ctiit">Hillsboro, OR 97123</div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="cf">
+        <div class="cfr">
+          <div class="cfg"><label>Name</label><input type="text" placeholder="Your name"/></div>
+          <div class="cfg"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
+        </div>
+        <div class="cfg"><label>Subject</label><input type="text" placeholder="Research collaboration, PhD inquiry…"/></div>
+        <div class="cfg"><label>Message</label><textarea placeholder="Your message…"></textarea></div>
+        <button class="cfsub" onclick="handleSub(event)">Send Message</button>
+        <p id="cfm"></p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 Shreya Shrestha &middot; Housing Specialist &amp; Urban Planning Researcher &middot;
+    <a href="https://www.linkedin.com/in/shreya-shrestha-planner" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const secs=document.querySelectorAll('section[id]');
+const nas=document.querySelectorAll('.nav-links a');
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){nas.forEach(a=>a.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-40% 0px -55% 0px'}).observe && secs.forEach(s=>new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){nas.forEach(a=>a.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-40% 0px -55% 0px'}).observe(s));
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),50)}})},{rootMargin:'0px 0px -40px 0px'}).observe && document.querySelectorAll('.rv').forEach(el=>new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),50);e.target.__io&&e.target.__io.unobserve(e.target)}})},{rootMargin:'0px 0px -40px 0px'}).observe(el));
+function handleSub(e){e.preventDefault();const m=document.getElementById('cfm');m.textContent='Thank you! This is a static site — please reach out directly via email or LinkedIn.';m.style.display='block'}
+</script>
+<script>
+// Better scroll reveal
+const rvio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvio.unobserve(e.target)}})
+},{rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>rvio.observe(el));
+// Better active nav
+const secio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active')
